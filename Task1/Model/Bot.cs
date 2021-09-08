@@ -3,19 +3,17 @@ using Task1.Interface;
 
 namespace Task1.Model
 {
-    internal class Bot : ICreature
+    internal class Bot : ICreature, IDamageable
     {
         private readonly Health _health;
         private readonly Weapon _weapon;
         private float _strength;
-        public string Name { get; }
 
-        public Bot(string name, Health health, Weapon weapon, float strength)
+        public Bot(Health health, Weapon weapon, float strength)
         {
             if (health == null)
                 throw new ArgumentOutOfRangeException(nameof(health));
-                
-            Name = name;
+            
             _health = health;
             _weapon = weapon;
             _strength = strength;

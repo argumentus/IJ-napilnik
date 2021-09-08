@@ -1,8 +1,8 @@
 namespace Task1.Interface
 {
-    internal interface ICreature : IName, IDamageable
+    internal interface ICreature : IDamageable
     {
         IHealth Health { get; }
-        void OnSeeEnemy(ICreature enemy);
+        void OnSeeEnemy(ICreature player);
     }
 }

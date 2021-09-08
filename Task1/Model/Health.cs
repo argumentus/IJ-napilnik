@@ -5,17 +5,14 @@ namespace Task1.Model
 {
     internal class Health : IHealth, IDamageable
     {
-        private IDyingPolicy _dyingPolicy;
         public int Value { get; private set; }
-        public event Action<string> OnDie;
 
-        public Health(int health, IDyingPolicy dyingPolicy)
+        public Health(int health)
         {
             Value = health;
-            _dyingPolicy = dyingPolicy;
         }
 
-        public bool IsDead => _dyingPolicy.IsDead(Value);
+        public bool IsDead => Value <= 0;
 
         public void TryDamage(float damage)
         {
@@ -26,9 +23,6 @@ namespace Task1.Model
 
             if (Value <= 0)
                 Value = 0;
-
-            if (_dyingPolicy.IsDead(Value))
-                OnDie?.Invoke("Name"); // TODO: Как правильно передать name или обработать event для вывода имени?
         }
     }
 }

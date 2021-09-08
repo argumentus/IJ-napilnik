@@ -9,14 +9,12 @@ namespace Task1
         {
             Console.WriteLine("Game Start");
 
-            Health healthPlayer = new Health(100, new NormalDyingPolicy());
-            Player player = new Player("Player 1", healthPlayer, 30f);
-            player.Health.OnDie += OnDieHandler;
+            Health healthPlayer = new Health(100);
+            Player player = new Player(healthPlayer, 30f);
 
-            Health healthBot = new Health(100, new NormalDyingPolicy());
+            Health healthBot = new Health(100);
             Weapon weaponBot = new Weapon(3.2f, 20, 3);
-            Bot artas = new Bot("Bot 1", healthBot, weaponBot, 10.5f);
-            artas.Health.OnDie += OnDieHandler;
+            Bot artas = new Bot(healthBot, weaponBot, 10.5f);
 
             do
             {
@@ -25,11 +23,6 @@ namespace Task1
             } while (!player.Health.IsDead && !artas.Health.IsDead);
 
             Console.WriteLine("Game End");
-        }
-
-        private static void OnDieHandler(string name)
-        {
-            Console.WriteLine("{0} умер!", name);
         }
     }
 }

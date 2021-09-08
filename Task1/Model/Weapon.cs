@@ -28,6 +28,11 @@ namespace Task1.Model
             enemy.TryDamage(_damage + damage);
         }
 
+        public void Reload()
+        {
+            _bullets = _bulletsCountDefault;
+        }
+        
         private void DecreaseBullet(int count)
         {
             if (_bulletsCountDefault - count < 0)
@@ -37,11 +42,6 @@ namespace Task1.Model
                 Reload();
             else
                 _bullets -= count;
-        }
-
-        public void Reload()
-        {
-            _bullets = _bulletsCountDefault;
         }
     }
 }

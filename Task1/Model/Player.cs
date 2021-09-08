@@ -3,18 +3,16 @@ using Task1.Interface;
 
 namespace Task1.Model
 {
-    internal class Player : ICreature
+    internal class Player : ICreature, IDamageable
     {
         private readonly Health _health;
         private float _damage;
-        public string Name { get; }
 
-        public Player(string name, Health health, float damage)
+        public Player(Health health, float damage)
         {
             if (health == null)
                 throw new ArgumentOutOfRangeException(nameof(health));
             
-            Name = name;
             _health = health;
             _damage = damage;
         }
