@@ -18,8 +18,6 @@ namespace Task03.Model
 
             if (gameRoom.IsJoined(this))
                 GameRoomStatus = new GameRoomStatus(gameRoom, GameRoomStatus.GameStatusType.NotReady);
-            
-                // _gameRoom = gameRoom;
             else
                 gameRoom.Join(this);
 
