@@ -1,4 +1,6 @@
-﻿namespace Task08
+﻿using Task08.Model;
+
+namespace Task08
 {
     internal class Program
     {

@@ -1,4 +1,4 @@
-namespace Task08
+namespace Task08.Model
 {
     public class Coin
     {
