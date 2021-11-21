@@ -14,12 +14,12 @@ namespace Task1.Model
 
         public bool IsDead => Value <= 0;
 
-        public void TryDamage(float damage)
+        public void TryDamage(int damage)
         {
-            if (damage < 0f)
+            if (damage < 0)
                 throw new ArgumentOutOfRangeException(nameof(damage));
 
-            Value -= Convert.ToInt32(damage);
+            Value -= damage;
 
             if (Value <= 0)
                 Value = 0;

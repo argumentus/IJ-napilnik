@@ -3,13 +3,13 @@ using Task1.Interface;
 
 namespace Task1.Model
 {
-    internal class Bot : ICreature, IDamageable
+    internal class Bot : IDamageable, IAlive
     {
         private readonly Health _health;
         private readonly Weapon _weapon;
-        private float _strength;
+        private int _strength;
 
-        public Bot(Health health, Weapon weapon, float strength)
+        public Bot(Health health, Weapon weapon, int strength)
         {
             if (health == null)
                 throw new ArgumentOutOfRangeException(nameof(health));
@@ -19,21 +19,36 @@ namespace Task1.Model
             _strength = strength;
         }
 
-        public IHealth Health => _health;
+        public bool IsAlive => !_health.IsDead;
 
-        public void TryDamage(float damage)
+        public void TryDamage(int damage)
         {
             _health.TryDamage(damage);
         }
 
-        public void OnSeeEnemy(ICreature enemy)
+        public void OnSeeEnemy(Player player)
         {
-            float damage = _strength * 2;
+            if (player.IsAlive)
+                TryFire(player);
+        }
 
-            if (!enemy.Health.IsDead)
-            {
-                _weapon?.TryFire(enemy, damage);
-            }
+        public bool CanFire()
+        {
+            return _weapon != null;
+        }
+        
+        public void TryFire(Player player)
+        {
+            if (!CanFire())
+                throw new ArgumentException(nameof(CanFire));
+            
+            if (_weapon.CanFire())
+                _weapon.TryFire(player, CalculateDamage());
+        }
+
+        private int CalculateDamage()
+        {
+            return _strength * 2;
         }
     }
 }

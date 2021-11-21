@@ -5,12 +5,12 @@ namespace Task1.Model
 {
     internal class Weapon
     {
-        private readonly float _damage;
+        private readonly int _damage;
         private readonly int _bulletsCountDefault;
         private readonly int _bulletPerShot;
         private int _bullets;
 
-        public Weapon(float damage, int bullets, int bulletPerShot)
+        public Weapon(int damage, int bullets, int bulletPerShot)
         {
             _damage = damage;
             _bulletsCountDefault = bullets;
@@ -18,11 +18,19 @@ namespace Task1.Model
             _bullets = bullets;
         }
 
-        public void TryFire(IDamageable enemy, float damage)
+        public bool CanFire()
         {
-            if (damage < 0f)
-                damage = 0f;
+            return HasEnoughBulletForFire();
+        }
+        
+        public void TryFire(IDamageable enemy, int damage)
+        {
+            if (damage < 0)
+                damage = 0;
 
+            if (!CanFire())
+                throw new ArgumentException(nameof(CanFire));
+            
             DecreaseBullet(_bulletPerShot);
 
             enemy.TryDamage(_damage + damage);
@@ -33,15 +41,21 @@ namespace Task1.Model
             _bullets = _bulletsCountDefault;
         }
         
+        private bool HasEnoughBulletForFire()
+        {
+            return _bullets >= _bulletPerShot;
+        }
+        
         private void DecreaseBullet(int count)
         {
-            if (_bulletsCountDefault - count < 0)
+            if (_bulletsCountDefault < count)
                 throw new ArgumentOutOfRangeException(nameof(count));
 
             if (_bullets - count < 0)
                 Reload();
             else
                 _bullets -= count;
+            // TODO: Замечание: В общем стрелять мы можем сразу тремя обоймами
         }
     }
 }

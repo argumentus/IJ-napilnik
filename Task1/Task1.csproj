@@ -39,7 +39,7 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Interface\ICreature.cs" />
+        <Compile Include="Interface\IAlive.cs" />
         <Compile Include="Interface\IDamageable.cs" />
         <Compile Include="Interface\IHeal.cs" />
         <Compile Include="Model\Bot.cs" />

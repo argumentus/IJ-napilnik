@@ -10,17 +10,17 @@ namespace Task1
             Console.WriteLine("Game Start");
 
             Health healthPlayer = new Health(100);
-            Player player = new Player(healthPlayer, 30f);
+            Player player = new Player(healthPlayer, 30);
 
             Health healthBot = new Health(100);
-            Weapon weaponBot = new Weapon(3.2f, 20, 3);
-            Bot artas = new Bot(healthBot, weaponBot, 10.5f);
+            Weapon weaponBot = new Weapon(3, 20, 3);
+            Bot artas = new Bot(healthBot, weaponBot, 10);
 
             do
             {
                 player.OnSeeEnemy(artas);
                 artas.OnSeeEnemy(player);
-            } while (!player.Health.IsDead && !artas.Health.IsDead);
+            } while (player.IsAlive && artas.IsAlive);
 
             Console.WriteLine("Game End");
         }
