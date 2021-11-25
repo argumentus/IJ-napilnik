@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Task02.Interface;
 
 namespace Task02.Model
 {
-    public class Cart : IViewGoods
+    public class Cart
     {
-        private List<Product> _products = new List<Product>();
+        private List<Cell> _cells = new List<Cell>();
         private Warehouse _warehouse;
         public string Paylink { get; private set; }
 
@@ -14,40 +15,34 @@ namespace Task02.Model
         {
             _warehouse = warehouse;
         }
-
-        public void Add(Good good, int count)
+        
+        public IReadOnlyList<IReadOnlyCell> Cells => _cells;
+        
+        public void Add(Product product, int count)
         {
             if (count < 1)
-                return;
+                throw new ArgumentException(nameof(count));
 
-            if (!_warehouse.CanOrder(good, count))
-                throw new ArgumentOutOfRangeException($"{nameof(count)} of {good.Name}");
-            
-            Product productInCart = Product.FindGoodInProducts(_products, good);
-            
+            if (!_warehouse.IsAvailableProduct(product, count))
+                throw new ArgumentOutOfRangeException($"{nameof(count)} of {product.Name}");
+
+            Cell productInCart = _cells.FirstOrDefault(p => p.Product.Name == product.Name);
+
             if (productInCart == null)
-                _products.Add(new Product(good, count));
+                _cells.Add(new Cell(product, count));
             else
                 productInCart.Count += count;
         }
 
         public Cart Order()
         {
-            if (_warehouse.TryOrder(_products))
-            {
-                _products = new List<Product>();
-                Paylink = UrlGenerator.PayLink();
-            } else
-                throw new ArgumentException(nameof(_products));
+            if (!_warehouse.Ship(_cells))
+                throw new InvalidCastException();
+            
+            Paylink = UrlGenerator.PayLink();
 
             return this;
         }
-        
-        public void ViewGoods()
-        {
-            Console.WriteLine("Товар в корзине:");
-            GoodView.View(_products);
-        }
-        
+
     }
 }

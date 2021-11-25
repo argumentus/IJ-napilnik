@@ -1,75 +1,75 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Task02.Interface;
 
 namespace Task02.Model
 {
-    public class Warehouse : IViewGoods
+    public class Warehouse
     {
-        private readonly List<Product> _products = new List<Product>();
+        private List<Cell> _cells = new List<Cell>();
         
-        public void Delive(Good good, int count)
-        {
-            if (count < 1)
-                return;
+        public IReadOnlyList<IReadOnlyCell> Cells => _cells; 
 
-            Product productInWarehouse = Product.FindGoodInProducts(_products, good);
-
-            if (productInWarehouse == null)
-                _products.Add(new Product(good, count));
-            else
-                productInWarehouse.Count += count;
-        }
-        
-        public bool TryOrder(List<Product> products)
+        public bool IsAvailableProduct(Product product, int count)
         {
-            if (!CanOrder(products))
-                return false;
-            
-            if (products.Count > 0)
-            {
-                foreach (Product product in products)
-                {
-                    if (CanOrder(product.Good, product.Count))
-                    {
-                        Product productInWarehouse = Product.FindGoodInProducts(_products, product.Good);
-                        if (productInWarehouse != null)
-                            productInWarehouse.Count -= product.Count;
-                    } else 
-                        return false;
-                }
-            } else 
-                return false;
-            
-            return true;
-        }
-
-        public bool CanOrder(List<Product> products)
-        {
-            if (products.Count > 0)
-            {
-                foreach (Product product in products)
-                {
-                    if (!CanOrder(product.Good, product.Count))
-                        return false;
-                }
-            } else 
-                return false;
-            
-            return true;
-        }
-
-        public bool CanOrder(Good good, int count)
-        {
-            Product productInWarehouse = Product.FindGoodInProducts(_products, good);
+            Cell productInWarehouse = GetCell(product);
 
             return productInWarehouse != null && productInWarehouse.Count >= count;
         }
-        
-        public void ViewGoods()
+
+        public bool IsAvailableProducts(List<Cell> cells)
         {
-            Console.WriteLine("Товар на складе:");
-            GoodView.View(_products);
+            if (cells == null || cells.Count == 0)
+                throw new NullReferenceException(nameof(cells));
+
+            foreach (Cell cell in cells)
+            {
+                if (!IsAvailableProduct(cell.Product, cell.Count))
+                    return false;
+            }
+
+            return true;
+        }
+        
+        public void Delive(Product product, int count)
+        {
+            if (count < 1)
+                throw new ArgumentException(nameof(count));
+
+            Cell cell = GetCell(product);
+
+            if (cell == null)
+                _cells.Add(new Cell(product, count));
+            else
+                cell.Count += count;
+        }
+
+        public bool Ship(List<Cell> cells)
+        {
+            if (!IsAvailableProducts(cells))
+                throw new ArgumentException(nameof(cells));
+
+            return TakeProducts(cells);
+        }
+        
+        private bool TakeProducts(List<Cell> cells)
+        {
+            if (!IsAvailableProducts(cells))
+                return false;
+            
+            foreach (Cell cell in cells)
+            {
+                Cell cellWarehouse = GetCell(cell.Product);
+                cellWarehouse.Count -= cell.Count;
+            }
+            
+            return true;
+        }
+        
+        private Cell GetCell(Product product)
+        {
+            return _cells.FirstOrDefault(p => p.Product.Name == product.Name);
         }
 
     }

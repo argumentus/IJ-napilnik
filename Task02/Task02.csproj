@@ -39,11 +39,10 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Interface\IViewGoods.cs" />
+        <Compile Include="Interface\IReadOnlyCell.cs" />
         <Compile Include="Model\Cart.cs" />
-        <Compile Include="Model\Good.cs" />
-        <Compile Include="Model\GoodView.cs" />
         <Compile Include="Model\Product.cs" />
+        <Compile Include="Model\Cell.cs" />
         <Compile Include="Model\Shop.cs" />
         <Compile Include="Model\UrlGenerator.cs" />
         <Compile Include="Model\Warehouse.cs" />
