@@ -5,12 +5,18 @@ namespace Task04.Model
 {
     class FileLogWritter : LogWritter, ILogger
     {
-        public FileLogWritter(LoggerDays loggerDays) : base(loggerDays)
+        private readonly ILogger _logger;
+        
+        public FileLogWritter(LoggerDays loggerDays, ILogger logger = null) : base(loggerDays)
         {
+            _logger = logger;
         }
 
         protected override void Write(string message)
         {
+            if (_logger != null)
+                _logger.WriteError(message);
+            
             File.WriteAllText("log.txt", message);
         }
     }

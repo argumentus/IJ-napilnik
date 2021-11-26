@@ -46,8 +46,10 @@ namespace Task04
             Pathfinder logger4 = new Pathfinder(new ConsoleLogWritter(new LoggerDays(fridayDays)));
             logger4.WriteError("Logger4.");
             
-            Pathfinder logger5 = new Pathfinder(new ConsoleLogWritter(new LoggerDays(allDays))
-                , new FileLogWritter(new LoggerDays(fridayDays)));
+            Pathfinder logger5 = new Pathfinder(
+                new ConsoleLogWritter(new LoggerDays(allDays), 
+                    new FileLogWritter(new LoggerDays(fridayDays))
+                    ));
             logger5.WriteError("Logger5.");
 
         }

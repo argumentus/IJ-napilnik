@@ -5,11 +5,11 @@ namespace Task04.Model
 {
     class Pathfinder : ILogger
     {
-        private readonly Array _loggers;
+        private readonly ILogger _logger;
         
-        public Pathfinder(params ILogger[] loggers)
+        public Pathfinder(ILogger logger)
         {
-            _loggers = loggers;
+            _logger = logger;
         }
 
         public void WriteError(string message)
@@ -19,10 +19,7 @@ namespace Task04.Model
 
         private void Find(string message)
         {
-            foreach (ILogger logger in _loggers)
-            {
-                logger.WriteError(message);
-            }
+            _logger.WriteError(message);
         }
     }
 }
