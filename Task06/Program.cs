@@ -5,7 +5,7 @@
         // Используйте более распространённое и простое слово в название метода -
         // https://gist.github.com/HolyMonkey/946002199f327790d8f66e8685a869f3
         
-        public static int GetElement(int[] array, int element)
+        public static int FindElement(int[] array, int element)
         {
             for (int i = 0; i < array.Length; i++)
                 if (array[i] == element)
