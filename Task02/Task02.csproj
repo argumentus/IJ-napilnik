@@ -41,6 +41,8 @@
     <ItemGroup>
         <Compile Include="Interface\IReadOnlyCell.cs" />
         <Compile Include="Model\Cart.cs" />
+        <Compile Include="Model\Cells.cs" />
+        <Compile Include="Model\Order.cs" />
         <Compile Include="Model\Product.cs" />
         <Compile Include="Model\Cell.cs" />
         <Compile Include="Model\Shop.cs" />

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Task02.Interface;
 using Task02.Model;
 
@@ -35,7 +34,7 @@ namespace Task02
             cart.Add(iPhone12, 9); //Ошибка, после заказа со склада убираются заказанные товары
         }
         
-        public static void ViewCell(IReadOnlyList<IReadOnlyCell> cells)
+        public static void ViewCell(Cells cells)
         {
             if (cells != null && cells.Count > 0)
             {
