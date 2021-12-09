@@ -3,30 +3,28 @@ using Task1.Interface;
 
 namespace Task1.Model
 {
-    internal class Player : IDamageable, IAlive
+    internal class Player : ICreature
     {
-        private readonly Health _health;
-        private int _damage;
-
-        public Player(Health health, int damage)
+        public Player(int health)
         {
-            if (health == null)
+            if (health <= 0)
                 throw new ArgumentOutOfRangeException(nameof(health));
             
-            _health = health;
-            _damage = damage;
+            Health = health;
         }
 
-        public bool IsAlive => !_health.IsDead;
+        public int Health { get; private set; }
+        public bool IsAlive => Health > 0;
 
         public void TryDamage(int damage)
         {
-            _health.TryDamage(damage);
-        }
+            if (damage < 0)
+                throw new ArgumentOutOfRangeException(nameof(damage));
 
-        public void OnSeeEnemy(Bot bot)
-        {
-            bot.TryDamage(_damage);
+            Health -= damage;
+
+            if (Health <= 0)
+                Health = 0;
         }
     }
 }

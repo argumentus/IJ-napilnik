@@ -39,11 +39,8 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Interface\IAlive.cs" />
-        <Compile Include="Interface\IDamageable.cs" />
-        <Compile Include="Interface\IHeal.cs" />
+        <Compile Include="Interface\ICreature.cs" />
         <Compile Include="Model\Bot.cs" />
-        <Compile Include="Model\Health.cs" />
         <Compile Include="Model\Player.cs" />
         <Compile Include="Model\Weapon.cs" />
         <Compile Include="Program.cs" />

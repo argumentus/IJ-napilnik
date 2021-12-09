@@ -7,7 +7,7 @@ namespace Task1.Model
     {
         private readonly int _damage;
         private readonly int _bulletPerShot;
-        private int _bullets;
+        private readonly int _bullets;
 
         public Weapon(int damage, int bullets, int bulletPerShot)
         {
@@ -21,15 +21,12 @@ namespace Task1.Model
             return HasEnoughBulletForFire();
         }
         
-        public void TryFire(IDamageable enemy, int damage)
+        public void TryFire(ICreature enemy)
         {
-            if (damage < 0)
-                damage = 0;
-
             if (!CanFire())
                 throw new ArgumentException(nameof(CanFire));
 
-            enemy.TryDamage(_damage + damage);
+            enemy.TryDamage(_damage);
         }
 
         private bool HasEnoughBulletForFire()
