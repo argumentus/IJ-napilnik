@@ -5,6 +5,6 @@ namespace Task1.Interface
         int Health { get; }
         bool IsAlive { get; }
         
-        void TryDamage(int damage);
+        void Damage(int damage);
     }
 }

@@ -26,7 +26,7 @@ namespace Task1.Model
             if (!CanFire())
                 throw new ArgumentException(nameof(CanFire));
 
-            enemy.TryDamage(_damage);
+            enemy.Damage(_damage);
         }
 
         private bool HasEnoughBulletForFire()

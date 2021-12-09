@@ -16,7 +16,7 @@ namespace Task1.Model
         public int Health { get; private set; }
         public bool IsAlive => Health > 0;
 
-        public void TryDamage(int damage)
+        public void Damage(int damage)
         {
             if (damage < 0)
                 throw new ArgumentOutOfRangeException(nameof(damage));
