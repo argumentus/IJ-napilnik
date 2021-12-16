@@ -8,23 +8,17 @@ namespace Task07
         
         class Weapon
         {
-            private readonly int _countBulletsForShoot;
+            private readonly int _countBulletsPerShoot;
             private int _bullets;
-
-            public Weapon(int countBulletsForShoot)
+            
+            public Weapon(int countBulletsPerShoot)
             {
-                _countBulletsForShoot = countBulletsForShoot;
+                _countBulletsPerShoot = countBulletsPerShoot;
             }
 
-            public bool CanShoot() => _bullets - _countBulletsForShoot > 0;
+            public bool CanShoot() => _bullets >= _countBulletsPerShoot;
 
-            public void Shoot()
-            {
-                if (!CanShoot())
-                    throw new ArgumentException(nameof(CanShoot));
-                    
-                _bullets -= _countBulletsForShoot;
-            }
+            public void Shoot() => _bullets -= _countBulletsPerShoot;
         }
         
         public static void Main(string[] args)
