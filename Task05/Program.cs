@@ -6,14 +6,14 @@ namespace Task05
     {
         // Переименуйте метод - https://gist.github.com/HolyMonkey/92e8c9c2f08471e31eceef30da7ea6ad
         
-        public static int ComparisonNumber(int a, int b, int c)
+        public static int Clamp(int value, int min, int max)
         {
-            if (a < b)
-                return b;
-            else if (a > c)
-                return c;
+            if (value < min)
+                return min;
+            else if (value > max)
+                return max;
             else
-                return a;
+                return value;
         }
         
         public static void Main(string[] args)
