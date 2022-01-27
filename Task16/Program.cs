@@ -5,7 +5,7 @@
         public static void Main(string[] args)
         {
             public void Shoot(Player player) {}
-            public string FindByIndex(int number) {}
+            public string Find(int index) {}
         }
     }
 }
