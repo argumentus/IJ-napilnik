@@ -1,6 +1,4 @@
-﻿using Task08.Model;
-
-namespace Task08
+﻿namespace Task08
 {
     internal class Program
     {
@@ -8,9 +6,9 @@ namespace Task08
         
         public static void Main(string[] args)
         {
-            Army army = new Army(10);
-            Coin coin = new Coin(10);
-            User user = new User("Vladislav");
+            int army = 10;
+            int coin = 10;
+            string name = "Vladislav";
         }
     }
 }
