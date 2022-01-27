@@ -11,7 +11,7 @@ namespace Task10
         class Target { }
         class Unit
         {
-            public IReadOnlyCollection<Unit> List {get; private set;}
+            public IReadOnlyCollection<Unit> Values { get; private set; }
         }
         
         public static void Main(string[] args)
