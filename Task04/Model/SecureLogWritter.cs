@@ -1,13 +1,12 @@
-using System;
 using Task04.Interface;
 
 namespace Task04.Model
 {
-    public class ConsoleLogWritter : LoggerDecorator
+    public class SecureLogWritter : LoggerDecorator
     {
         private readonly Day _day;
 
-        public ConsoleLogWritter(Day day = null, ILogger logger = null) : base(logger)
+        public SecureLogWritter(Day day, ILogger logger) : base(logger)
         {
             _day = day;
         }
@@ -15,9 +14,7 @@ namespace Task04.Model
         public override void WriteError(string message)
         {
             if (_day != null && _day.IsExist())
-                Console.WriteLine(message);
-
-            base.WriteError(message);
+                base.WriteError(message);
         }
     }
 }

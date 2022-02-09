@@ -1,15 +1,18 @@
 using System;
+using System.Collections.Generic;
 using Task04.Interface;
 
 namespace Task04.Model
 {
-    class Pathfinder : ILogger
+    public class Pathfinder : ILogger
     {
         private readonly ILogger _logger;
-        
-        public Pathfinder(ILogger logger)
+
+        public Pathfinder()
         {
-            _logger = logger;
+            List<DayOfWeek> days = new List<DayOfWeek> { DayOfWeek.Friday };
+            Day day = new Day(days);
+            _logger = new SecureLogWritter(day, new ConsoleLogWritter(day));
         }
 
         public void WriteError(string message)

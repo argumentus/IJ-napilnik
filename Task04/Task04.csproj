@@ -41,9 +41,10 @@
         <Compile Include="Interface\ILogger.cs" />
         <Compile Include="Model\ConsoleLogWritter.cs" />
         <Compile Include="Model\FileLogWritter.cs" />
-        <Compile Include="Model\LoggerDays.cs" />
-        <Compile Include="Model\LogWritter.cs" />
+        <Compile Include="Model\Day.cs" />
+        <Compile Include="Model\LoggerDecorator.cs" />
         <Compile Include="Model\Pathfinder.cs" />
+        <Compile Include="Model\SecureLogWritter.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>

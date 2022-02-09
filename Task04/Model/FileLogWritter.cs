@@ -3,21 +3,21 @@ using Task04.Interface;
 
 namespace Task04.Model
 {
-    class FileLogWritter : LogWritter, ILogger
+    public class FileLogWritter : LoggerDecorator
     {
-        private readonly ILogger _logger;
-        
-        public FileLogWritter(LoggerDays loggerDays, ILogger logger = null) : base(loggerDays)
+        private readonly Day _day;
+
+        public FileLogWritter(Day day, ILogger logger = null) : base(logger)
         {
-            _logger = logger;
+            _day = day;
         }
 
-        protected override void Write(string message)
+        public override void WriteError(string message)
         {
-            if (_logger != null)
-                _logger.WriteError(message);
-            
-            File.WriteAllText("log.txt", message);
+            if (_day != null && _day.IsExist())
+                File.WriteAllText("log.txt", message);
+
+            base.WriteError(message);
         }
     }
 }
