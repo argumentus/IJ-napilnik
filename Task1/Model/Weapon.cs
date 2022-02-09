@@ -1,5 +1,4 @@
 using System;
-using Task1.Interface;
 
 namespace Task1.Model
 {
@@ -20,19 +19,18 @@ namespace Task1.Model
         {
             return HasEnoughBulletForFire();
         }
-        
-        public void TryFire(ICreature enemy)
+
+        public void TryFire(Player enemy)
         {
             if (!CanFire())
                 throw new ArgumentException(nameof(CanFire));
 
-            enemy.Damage(_damage);
+            enemy.TryDamage(_damage);
         }
 
         private bool HasEnoughBulletForFire()
         {
             return _bullets >= _bulletPerShot;
         }
-        
     }
 }

@@ -1,6 +1,3 @@
-using System;
-using Task1.Interface;
-
 namespace Task1.Model
 {
     internal class Bot
@@ -18,18 +15,9 @@ namespace Task1.Model
                 TryFire(player);
         }
 
-        public bool CanFire()
-        {
-            return _weapon != null && _weapon.CanFire();
-        }
-        
         public void TryFire(Player player)
         {
-            if (!CanFire())
-                throw new ArgumentException(nameof(CanFire));
-            
-            _weapon.TryFire(player);
+            _weapon?.TryFire(player);
         }
-
     }
 }
