@@ -6,7 +6,7 @@ namespace Task1.Model
     {
         private readonly int _damage;
         private readonly int _bulletPerShot;
-        private readonly int _bullets;
+        private int _bullets;
 
         public Weapon(int damage, int bullets, int bulletPerShot)
         {
@@ -26,11 +26,20 @@ namespace Task1.Model
                 throw new ArgumentException(nameof(CanFire));
 
             enemy.TryDamage(_damage);
+            DecreaseBullet(_bulletPerShot);
         }
 
         private bool HasEnoughBulletForFire()
         {
             return _bullets >= _bulletPerShot;
+        }
+        
+        private void DecreaseBullet(int count)
+        {
+            if (_bullets < count)
+                throw new ArgumentOutOfRangeException(nameof(count));
+
+            _bullets -= count;
         }
     }
 }
