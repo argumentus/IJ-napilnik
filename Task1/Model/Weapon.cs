@@ -8,32 +8,20 @@ namespace Task1.Model
         private readonly int _bulletPerShot;
         private int _bullets;
 
-        public Weapon(int damage, int bullets, int bulletPerShot)
-        {
-            _damage = damage;
-            _bulletPerShot = bulletPerShot;
-            _bullets = bullets;
-        }
+        public Weapon(int damage, int bullets, int bulletPerShot) =>
+            (_damage, _bulletPerShot, _bullets) = (damage, bulletPerShot, bullets);
 
-        public bool CanFire()
-        {
-            return HasEnoughBulletForFire();
-        }
+        public bool HasEnoughBulletForFire => _bullets >= _bulletPerShot;
 
-        public void TryFire(Player enemy)
+        public void Damage(Player enemy)
         {
-            if (!CanFire())
-                throw new ArgumentException(nameof(CanFire));
+            if (!HasEnoughBulletForFire)
+                throw new ArgumentException(nameof(HasEnoughBulletForFire));
 
             enemy.TryDamage(_damage);
             DecreaseBullet(_bulletPerShot);
         }
 
-        private bool HasEnoughBulletForFire()
-        {
-            return _bullets >= _bulletPerShot;
-        }
-        
         private void DecreaseBullet(int count)
         {
             if (_bullets < count)

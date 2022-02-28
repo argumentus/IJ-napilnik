@@ -15,14 +15,9 @@ namespace Task1.Model
         public int Health { get; private set; }
         public bool IsAlive => Health > 0;
 
-        public bool CanTakeDamage()
-        {
-            return IsAlive;
-        }
-
         public void TryDamage(int damage)
         {
-            if (CanTakeDamage())
+            if (IsAlive)
                 Damage(damage);
         }
 

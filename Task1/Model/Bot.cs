@@ -1,3 +1,5 @@
+using System;
+
 namespace Task1.Model
 {
     internal class Bot
@@ -6,18 +8,15 @@ namespace Task1.Model
 
         public Bot(Weapon weapon)
         {
-            _weapon = weapon;
+            _weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
         }
 
         public void OnSeeEnemy(Player player)
         {
             if (player.IsAlive)
-                TryFire(player);
+                Fire(player);
         }
 
-        public void TryFire(Player player)
-        {
-            _weapon?.TryFire(player);
-        }
+        public void Fire(Player player) => _weapon.Damage(player);
     }
 }

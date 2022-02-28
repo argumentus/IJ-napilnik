@@ -17,7 +17,7 @@ namespace Task1
             
             Player player = new Player(100);
             
-            Weapon weaponBot = new Weapon(3, 20, 3);
+            Weapon weaponBot = new Weapon(20, 20, 3);
             Bot artas = new Bot(weaponBot);
 
             do
