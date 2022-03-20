@@ -18,16 +18,8 @@ namespace Task1.Model
             if (!HasEnoughBulletForFire)
                 throw new ArgumentException(nameof(HasEnoughBulletForFire));
 
-            enemy.TryDamage(_damage);
-            DecreaseBullet(_bulletPerShot);
-        }
-
-        private void DecreaseBullet(int count)
-        {
-            if (_bullets < count)
-                throw new ArgumentOutOfRangeException(nameof(count));
-
-            _bullets -= count;
+            enemy.Damage(_damage);
+            _bullets -= _bulletPerShot;
         }
     }
 }

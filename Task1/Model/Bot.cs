@@ -14,9 +14,7 @@ namespace Task1.Model
         public void OnSeeEnemy(Player player)
         {
             if (player.IsAlive)
-                Fire(player);
+                _weapon.Damage(player);
         }
-
-        public void Fire(Player player) => _weapon.Damage(player);
     }
 }
